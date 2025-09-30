@@ -73,18 +73,28 @@ function Navbar() {
 
 function Hero() {
   return (
-    <section className="relative h-[60svh] w-full overflow-hidden">
-      <img
-        src="https://images.unsplash.com/photo-1526498460520-4c246339dccb?q=80&w=1600&auto=format&fit=crop"
-        alt="Background"
-        className="absolute inset-0 h-full w-full object-cover"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-white via-white/60 to-transparent dark:from-neutral-950 dark:via-neutral-950/60" />
-      <div className="relative mx-auto max-w-6xl px-4 pt-20">
-        <h1 className="text-4xl md:text-6xl font-semibold tracking-tight">Manuel Campano</h1>
-        <p className="mt-4 max-w-2xl text-base md:text-lg text-neutral-700 dark:text-neutral-300">
-          I am a developer with a background in science, psychology, and the arts, passionate about creating applications that combine creativity, technology, and real-world impact.
-        </p>
+    <section className="relative h-[70svh] w-full overflow-hidden bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900">
+      <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/90 via-neutral-800/70 to-transparent" />
+      <div className="relative mx-auto max-w-6xl px-4 pt-32 flex items-center min-h-full">
+        <div className="max-w-3xl">
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-6">
+            Manuel Campano
+          </h1>
+          <p className="text-xl md:text-2xl text-neutral-200 leading-relaxed">
+            Mobile App Developer
+          </p>
+          <p className="mt-4 text-lg text-neutral-300 max-w-2xl">
+            I am a developer with a background in science, psychology, and the arts, passionate about creating applications that combine creativity, technology, and real-world impact.
+          </p>
+          <div className="mt-8">
+            <a 
+              href="#projects" 
+              className="inline-flex items-center px-6 py-3 bg-white text-neutral-900 font-semibold rounded-lg hover:bg-neutral-100 transition-colors"
+            >
+              View My Work
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   )
@@ -114,20 +124,31 @@ const projects: Project[] = [
 
 function ProjectCard({ project }: { project: Project }) {
   return (
-    <div className="group relative overflow-hidden rounded-xl border border-neutral-200/70 dark:border-neutral-800/70">
-      <img src={project.image} alt={project.title} className="h-56 w-full object-cover transition duration-300 group-hover:blur-sm" />
-      <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-4 text-center opacity-0 transition duration-300 group-hover:opacity-100">
-        <div className="pointer-events-auto">
-          <p className="mx-auto max-w-md text-sm md:text-base text-neutral-900 dark:text-neutral-100 bg-white/80 dark:bg-neutral-900/70 px-3 py-2 rounded">
+    <div className="group relative overflow-hidden rounded-2xl border border-neutral-200/50 dark:border-neutral-800/50 bg-white dark:bg-neutral-900 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+      <div className="aspect-video overflow-hidden">
+        <img 
+          src={project.image} 
+          alt={project.title} 
+          className="h-full w-full object-cover transition duration-500 group-hover:scale-110" 
+        />
+      </div>
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300" />
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center opacity-0 group-hover:opacity-100 transition duration-300">
+        <div className="transform translate-y-4 group-hover:translate-y-0 transition duration-300">
+          <p className="text-white text-lg font-medium mb-4 leading-relaxed">
             {project.blurb}
           </p>
-          <div className="mt-4">
-            <Link to={`/projects/${project.slug}`} className="inline-block rounded-md bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 px-3 py-2 text-sm">More information here</Link>
-          </div>
+          <Link 
+            to={`/projects/${project.slug}`} 
+            className="inline-flex items-center px-6 py-3 bg-white text-neutral-900 font-semibold rounded-lg hover:bg-neutral-100 transition-colors"
+          >
+            View Project Details
+          </Link>
         </div>
       </div>
-      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-3">
-        <h3 className="text-white font-medium">{project.title}</h3>
+      <div className="p-6">
+        <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-2">{project.title}</h3>
+        <p className="text-neutral-600 dark:text-neutral-300 text-sm">Mobile App Development</p>
       </div>
     </div>
   )
@@ -137,9 +158,14 @@ function MainView() {
   return (
     <main>
       <Hero />
-      <section className="mx-auto max-w-6xl px-4 py-10">
-        <h2 className="text-xl font-semibold mb-4">Projects</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <section id="projects" className="mx-auto max-w-6xl px-4 py-20">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 dark:text-white mb-4">Featured Projects</h2>
+          <p className="text-lg text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto">
+            Mobile applications that showcase my development skills and passion for creating meaningful user experiences.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projects.map((p) => (
             <ProjectCard key={p.slug} project={p} />
           ))}
